@@ -94,11 +94,10 @@ Em desenvolvimento — Sprint 1 concluído
 
 ##  Autores
 
-* Júlia Souza
+* Allex Maia
+* Julia Souza
+* Murilo Gusmão
 * Nicolas Everton Duarte da Silva
 * Stephany de Mello Amorim
-* Allex Maia
-
-
 
 
