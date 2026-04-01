@@ -32,7 +32,7 @@ O sistema:
 
 ## Funcionalidades
 
-### Sprint 1 (atual)
+### Sprint 1 (concluída)
 
 * Estrutura inicial do projeto
 * Definição do problema, solução e escopo
@@ -49,7 +49,7 @@ O sistema:
 ## Tecnologias utilizadas
 
 * Python
-* Git/GitHub
+* Git / GitHub
 * Visual Studio Code
 
 ---
@@ -74,6 +74,8 @@ cd WinFix
 python main.py
 ```
 
+---
+
 ## Diferenciais
 
 O WinFix padroniza procedimentos técnicos, transformando tarefas que dependem da experiência individual em um fluxo automatizado e consistente.
@@ -88,17 +90,123 @@ Com isso, o sistema:
 
 ## Status do projeto
 
-Em desenvolvimento — Sprint 1 concluído
+* ✅ Concluído — Sprint 1
+* 🚧 Em desenvolvimento — Sprint 2
 
 ---
 
-##  Autores
+## Modelo de Ramificação (GitHub Flow)
 
-* Júlia Souza
+### Estrutura de branches
+
+* `main` → sempre estável
+* `feature/*` → novas funcionalidades
+* `fix/*` → correções de bugs
+
+---
+
+### Fluxo de trabalho
+
+1. Criar uma branch
+2. Desenvolver a funcionalidade
+3. Abrir Pull Request
+4. Revisar código
+5. Realizar merge na `main`
+
+---
+
+### Regras
+
+*  Nunca commitar diretamente na `main`
+*  Sempre criar uma branch
+*  Sempre abrir Pull Request
+*  Nomear branches corretamente
+
+---
+
+##  Padrão de Commits (Conventional Commits)
+
+###  Estrutura
+
+```
+tipo(escopo): descrição
+```
+
+---
+
+### 🔑 Tipos de commit
+
+| Tipo     | Quando usar                     |
+| -------- | ------------------------------- |
+| feat     | Nova funcionalidade             |
+| fix      | Correção de bug                 |
+| docs     | Documentação                    |
+| style    | Formatação (sem alterar lógica) |
+| refactor | Refatoração                     |
+| test     | Testes                          |
+| chore    | Tarefas gerais                  |
+
+---
+
+### Regras
+
+* Usar descrição em minúsculo
+* Não utilizar ponto final
+* Escrever no presente
+
+---
+
+### Exemplos
+
+```
+feat(login): adiciona autenticação com jwt
+fix(api): corrige erro 500 ao buscar usuário
+docs(readme): adiciona instruções de instalação
+refactor(user): melhora lógica de validação
+chore: atualiza dependências
+```
+
+---
+
+## Como iremos aplicar no projeto
+
+### 1. Criar uma branch
+
+```bash
+git checkout -b feature/login
+```
+
+---
+
+### 2. Fazer commits padronizados
+
+```bash
+git commit -m "feat(login): cria tela de login"
+```
+
+---
+
+### 3. Subir a branch
+
+```bash
+git push origin feature/login
+```
+
+---
+
+### 4. Abrir Pull Request
+
+* Revisar o código
+* Realizar o merge na `main`
+
+---
+
+## 👥 Autores
+
+* Allex Maia
+* Julia Souza
+* Murilo Gusmão
 * Nicolas Everton Duarte da Silva
 * Stephany de Mello Amorim
-* Allex Maia
 
-
-
-
+---
