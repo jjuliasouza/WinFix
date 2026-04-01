@@ -127,6 +127,11 @@ Com isso, o sistema:
 ##  Padrão de Commits (Conventional Commits)
 
 ###  Estrutura
+* Allex Maia
+* Julia Souza
+* Murilo Gusmão
+* Nicolas Everton Duarte da Silva
+* Stephany de Mello Amorim
 
 ```
 tipo(escopo): descrição
