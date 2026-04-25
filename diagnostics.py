@@ -191,3 +191,4 @@ def export_report(results: List[Dict[str, str]], filename: str = "winfix_report.
         f.write(f"  FIM DO RELATÓRIO\n")
         f.write(f"{linha}\n")
     logger.info(f"📄 Relatório salvo: {filename}")
+    
