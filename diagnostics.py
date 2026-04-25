@@ -106,3 +106,88 @@ async def run_full_diagnostics() -> List[Dict[str, str]]:
         logger.debug(f"{name}: {status}")
     logger.info(f"✅ Diags OK: {len(results)} itens")
     return results
+# cmd, needs_admin, timeout_segundos, nota (exibe no output)
+FIXES = {
+    "DNS Flush":   ("ipconfig /flushdns",                         False, 30,   ""),
+    "Winsock":     ("netsh winsock reset",                        True,  30,   "Requer reboot para ter efeito."),
+    "IP Reset":    ("netsh int ip reset",                         True,  30,   "Requer reboot para ter efeito."),
+    "Firewall":    ("netsh advfirewall reset",                    True,  30,   ""),
+    "DNS Service": ("net stop Dnscache && net start Dnscache",    True,  30,   ""),
+    "GPUpdate":    ("gpupdate /force",                            False, 60,   ""),
+    "CHKDSK":      ("chkdsk C: /scan",                           True,  120,  "Usa /scan (online, sem reboot)."),
+    "SFC":         ("sfc /scannow",                               True,  1800, "Pode levar até 30 min."),
+    "DISM":        ("dism /online /cleanup-image /restorehealth", True,  1800, "Pode levar até 30 min."),
+    "IP Renew":    ("ipconfig /release && ipconfig /renew",       True,  60,   "Derruba a rede brevemente."),
+}
+
+
+async def run_fix(name: Optional[str] = None, on_progress=None) -> Tuple[bool, str]:
+    """
+    Fix individual ou completo.
+    on_progress(atual, total, nome) chamado antes de cada fix no modo completo.
+    Retorna (sucesso, output_texto).
+    """
+    if name and name in FIXES:
+        cmd, _, timeout, nota = FIXES[name]
+        stdout, stderr, code = await run_cmd(cmd, timeout)
+        output = (stdout + stderr).strip() or "(sem output)"
+        if nota:
+            output = f"[NOTA] {nota}\n\n{output}"
+        resolved = code == 0
+        logger.info(f"Fix '{name}': {'✅ Resolvido' if resolved else '⚠️ Falhou'}")
+        return resolved, output
+
+    total = len(FIXES)
+    lines = []
+    all_ok = True
+    for i, (n, (cmd, _, timeout, nota)) in enumerate(FIXES.items(), 1):
+        if on_progress:
+            await on_progress(i, total, n)
+        stdout, stderr, code = await run_cmd(cmd, timeout)
+        ok = code == 0
+        if not ok:
+            all_ok = False
+        saida = (stdout + stderr).strip()[:300]
+        prefix = f"[{'OK  ' if ok else 'FAIL'}] {i:02d}/{total} {n}"
+        if nota:
+            prefix += f" ({nota})"
+        lines.append(f"{prefix}\n{saida}\n")
+        logger.info(f"Fix '{n}': {'OK' if ok else 'Falhou'}")
+    return all_ok, "\n".join(lines)
+
+
+def export_report(results: List[Dict[str, str]], filename: str = "winfix_report.txt") -> None:
+    """
+    Exporta relatório TXT formatado com resultado dos diagnósticos.
+
+    Args:
+        results: Lista de dicts retornada por run_full_diagnostics().
+        filename: Caminho do arquivo de saída.
+    """
+    from datetime import datetime
+    problemas = sum(1 for r in results if "🔴" in r["status"])
+    ok = len(results) - problemas
+    linha = "=" * 70
+    sublinha = "-" * 70
+    agora = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
+    with open(filename, 'w', encoding='utf-8') as f:
+        f.write(f"{linha}\n")
+        f.write(f"  WINFIX v4.0 - RELATÓRIO DE DIAGNÓSTICO\n")
+        f.write(f"{linha}\n")
+        f.write(f"  Data/Hora : {agora}\n")
+        f.write(f"  Total     : {len(results)} testes\n")
+        f.write(f"  OK        : {ok}\n")
+        f.write(f"  Problemas : {problemas}\n")
+        f.write(f"{linha}\n\n")
+        for i, r in enumerate(results, 1):
+            status_label = "[ OK ]" if "🟢" in r["status"] else "[FAIL]"
+            f.write(f"{i:02d}. {status_label}  {r['name']}\n")
+            f.write(f"{sublinha}\n")
+            detalhes = r["details"].strip()
+            for linha_det in detalhes.splitlines():
+                f.write(f"    {linha_det}\n")
+            f.write("\n")
+        f.write(f"{linha}\n")
+        f.write(f"  FIM DO RELATÓRIO\n")
+        f.write(f"{linha}\n")
+    logger.info(f"📄 Relatório salvo: {filename}")
