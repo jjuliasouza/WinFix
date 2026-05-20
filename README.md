@@ -38,7 +38,7 @@ O sistema:
 * Estrutura inicial do projeto
 * Definição do problema, solução e escopo
 
-### Sprint 2 (em desenvolvimento)
+### Sprint 2 (concluída)
 
 * Aba Diagnósticos
 - Executa 22+ testes de rede, disco, memória, processos, drivers e sistema
@@ -53,6 +53,11 @@ O sistema:
 - Exporta um arquivo `.txt` formatado com todos os resultados dos diagnósticos
 - Abre automaticamente no Bloco de Notas após salvar
 
+* Testes unitários automatizados
+- Teste de sucesso: Verifica se a função retorna corretamente a saída do comando quando tudo funciona normalmente.
+- Teste de timeout: Verifica se a função consegue tratar casos em que o comando demora demais para responder.
+- Teste de erro/exceção: Verifica se a função trata erros inesperados sem quebrar o sistema.
+- O código usa mocks (patch e AsyncMock) para simular os comandos do terminal sem executar nada de verdade no computador.
 ---
 
 ## Tecnologias utilizadas
@@ -222,7 +227,8 @@ Com isso, o sistema:
 ## Status do projeto
 
 * ✅ Concluído — Sprint 1
-* 🚧 Em desenvolvimento — Sprint 2
+* ✅ Concluído — Sprint 2
+* 🚧 Em desenvolvimento — Sprint 3
 
 ---
 
