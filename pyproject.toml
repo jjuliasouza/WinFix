@@ -1,0 +1,61 @@
+# pyproject.toml
+# Configuração centralizada para Ruff, Black, MyPy e Pytest
+
+[tool.black]
+line-length    = 100
+target-version = ["py311"]
+# Arquivos ignorados
+extend-exclude = '''
+/(
+  dist | build | .venv | __pycache__
+)/
+'''
+
+# ── Ruff (lint + isort) ───────────────────────────────────────────────────────
+[tool.ruff]
+line-length    = 100
+target-version = "py311"
+exclude        = ["dist", "build", ".venv", "__pycache__", "*.spec"]
+
+[tool.ruff.lint]
+select = [
+    "E",   # pycodestyle errors
+    "W",   # pycodestyle warnings
+    "F",   # pyflakes (imports não usados, variáveis indefinidas)
+    "I",   # isort (ordem dos imports)
+    "UP",  # pyupgrade (moderniza sintaxe)
+    "B",   # flake8-bugbear (bugs comuns)
+    "C4",  # flake8-comprehensions
+    "SIM", # flake8-simplify
+]
+ignore = [
+    "E501",  # linha longa — controlado pelo Black
+    "B008",  # chamadas de função em argumentos padrão (comum no Flet)
+]
+
+[tool.ruff.lint.isort]
+known-first-party = ["auth", "config", "diagnostics"]
+
+# ── MyPy ─────────────────────────────────────────────────────────────────────
+[tool.mypy]
+python_version         = "3.11"
+ignore_missing_imports = true
+warn_unused_ignores    = true
+warn_return_any        = true
+strict_optional        = true
+
+# ── Pytest ───────────────────────────────────────────────────────────────────
+[tool.pytest.ini_options]
+asyncio_mode  = "auto"          # pytest-asyncio: não precisa de @pytest.mark.asyncio
+testpaths     = ["winfix/tests"]
+addopts       = "-v --tb=short"
+
+# ── Coverage ─────────────────────────────────────────────────────────────────
+[tool.coverage.run]
+source   = ["winfix"]
+omit     = ["winfix/tests/*", "**/__pycache__/*"]
+
+[tool.coverage.report]
+show_missing  = true
+skip_covered  = false
+fail_under    = 60              # falha o CI se cobertura < 60%

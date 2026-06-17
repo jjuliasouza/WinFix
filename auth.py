@@ -24,25 +24,13 @@ def is_admin() -> bool:
         ValueError: Se ctypes falhar (raro em Win7+).
     """
     try:
-        # Chama API Windows shell32.IsUserAnAdmin()
         return ctypes.windll.shell32.IsUserAnAdmin() != 0
     except Exception:
-        # Fallback seguro: assume não-admin em crash
         return False
 
 
 async def show_admin_popup(page: ft.Page) -> None:
-    """
-    Mostra popup Flet recomendando admin (não obrigatório).
 
-    Por quê? Melhora UX: avisa sem forçar relaunch, permite continuar sem fixes pesados.
-
-    Args:
-        page (ft.Page): Instância Flet para dialog.
-
-    Exemplo:
-        await show_admin_popup(page)  # Chame no main após page.load()
-    """
     if not is_admin():
         # Cria AlertDialog não-bloqueante (usuário escolhe)
         dialog = ft.AlertDialog(
