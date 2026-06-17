@@ -1,0 +1,87 @@
+2026-04-18 14:54:08,738 - CMD ping -n 4 google.com: OK
+2026-04-18 14:54:08,789 - CMD ipconfig /all: OK
+2026-04-18 14:54:16,155 - CMD tracert -h 4 google.com: OK
+2026-04-18 14:54:18,296 - CMD nslookup google.com: OK
+2026-04-18 14:54:18,318 - CMD wmic logicaldisk get DeviceID,FreeSpace,Size /format:list: OK
+2026-04-18 14:54:18,336 - CMD wmic OS get FreePhysicalMemory,TotalVisibleMemorySize /format:list: OK
+2026-04-18 14:54:18,655 - CMD tasklist /fo table /nh: OK
+2026-04-18 14:54:18,968 - CMD netsh interface show interface: OK
+2026-04-18 14:55:43,683 - CMD sfc /verifyonly: FAIL
+2026-04-18 14:58:40,454 - CMD ipconfig /flushdns: OK
+2026-04-18 14:58:40,578 - CMD ipconfig /release: OK
+2026-04-18 14:58:42,920 - CMD ipconfig /renew: OK
+2026-04-18 14:58:43,034 - CMD netsh winsock reset: OK
+2026-04-18 14:58:43,105 - CMD netsh int ip reset: OK
+2026-04-18 14:58:43,168 - CMD netsh advfirewall reset: OK
+2026-04-18 14:58:43,194 - CMD sfc /scannow: OK
+2026-04-18 14:58:59,092 - CMD ipconfig /flushdns: OK
+2026-04-18 14:58:59,196 - CMD ipconfig /release: OK
+2026-04-18 14:59:01,554 - CMD ipconfig /renew: OK
+2026-04-18 14:59:01,667 - CMD netsh winsock reset: OK
+2026-04-18 14:59:01,740 - CMD netsh int ip reset: OK
+2026-04-18 14:59:01,931 - CMD netsh advfirewall reset: OK
+2026-04-18 14:59:02,680 - CMD sfc /scannow: OK
+2026-04-18 14:59:09,977 - CMD ping -n 4 google.com: OK
+2026-04-18 14:59:10,026 - CMD ipconfig /all: OK
+2026-04-18 14:59:17,004 - CMD tracert -h 4 google.com: OK
+2026-04-18 14:59:17,240 - CMD nslookup google.com: OK
+2026-04-18 14:59:17,260 - CMD wmic logicaldisk get DeviceID,FreeSpace,Size /format:list: OK
+2026-04-18 14:59:17,277 - CMD wmic OS get FreePhysicalMemory,TotalVisibleMemorySize /format:list: OK
+2026-04-18 14:59:17,519 - CMD tasklist /fo table /nh: OK
+2026-04-18 14:59:17,677 - CMD netsh interface show interface: OK
+2026-04-18 14:59:18,321 - CMD sfc /verifyonly: OK
+2026-04-18 14:59:18,575 - CMD dism /online /cleanup-image /checkhealth: OK
+2026-04-18 14:59:36,690 - CMD ipconfig /flushdns: OK
+2026-04-18 14:59:36,791 - CMD ipconfig /release: OK
+2026-04-18 14:59:39,162 - CMD ipconfig /renew: OK
+2026-04-18 14:59:39,281 - CMD netsh winsock reset: OK
+2026-04-18 14:59:39,350 - CMD netsh int ip reset: OK
+2026-04-18 14:59:39,531 - CMD netsh advfirewall reset: OK
+2026-04-18 14:59:40,253 - CMD sfc /scannow: OK
+2026-04-18 16:54:56,395 - CMD ping -n 4 google.com: OK
+2026-04-18 16:54:56,445 - CMD ipconfig /all: OK
+2026-04-18 16:55:02,739 - CMD tracert -h 4 google.com: OK
+2026-04-18 16:55:04,831 - CMD nslookup google.com: OK
+2026-04-18 16:55:04,853 - CMD wmic logicaldisk get DeviceID,FreeSpace,Size /format:list: OK
+2026-04-18 16:55:04,868 - CMD wmic OS get FreePhysicalMemory,TotalVisibleMemorySize /format:list: OK
+2026-04-18 16:55:05,111 - CMD tasklist /fo table /nh: OK
+2026-04-18 16:55:05,265 - CMD netsh interface show interface: OK
+2026-04-18 16:55:05,293 - CMD sfc /verifyonly: OK
+2026-04-18 16:55:05,332 - CMD dism /online /cleanup-image /checkhealth: OK
+2026-04-18 16:58:41,129 - CMD ping -n 4 google.com: OK
+2026-04-18 16:58:41,192 - CMD ipconfig /all: OK
+2026-04-18 16:58:48,688 - CMD tracert -h 4 google.com: OK
+2026-04-18 16:58:48,773 - CMD nslookup google.com: OK
+2026-04-18 16:58:48,798 - CMD wmic logicaldisk get DeviceID,FreeSpace,Size /format:list: OK
+2026-04-18 16:58:48,816 - CMD wmic OS get FreePhysicalMemory,TotalVisibleMemorySize /format:list: OK
+2026-04-18 16:58:49,053 - CMD tasklist /fo table /nh: OK
+2026-04-18 16:58:49,130 - CMD netsh interface show interface: OK
+2026-04-18 16:58:51,909 - CMD sfc /verifyonly: OK
+2026-04-18 16:58:52,136 - CMD dism /online /cleanup-image /checkhealth: OK
+2026-04-18 17:23:57,096 - CMD ping -n 4 google.com: OK
+2026-04-18 17:23:57,163 - CMD ipconfig /all: OK
+2026-04-18 17:24:03,374 - CMD tracert -h 4 google.com: OK
+2026-04-18 17:24:04,824 - CMD nslookup google.com: OK
+2026-04-18 17:24:04,844 - CMD wmic logicaldisk get DeviceID,FreeSpace,Size /format:list: OK
+2026-04-18 17:24:04,862 - CMD wmic OS get FreePhysicalMemory,TotalVisibleMemorySize /format:list: OK
+2026-04-18 17:24:05,087 - CMD tasklist /fo table /nh: OK
+2026-04-18 17:24:05,189 - CMD netsh interface show interface: OK
+2026-04-18 17:24:07,664 - CMD sfc /verifyonly: OK
+2026-04-18 17:24:07,865 - CMD dism /online /cleanup-image /checkhealth: OK
+2026-04-18 17:27:53,831 - CMD ping -n 4 google.com: OK
+2026-04-18 17:27:53,893 - CMD ipconfig /all: OK
+2026-04-18 17:28:00,938 - CMD tracert -h 4 google.com: OK
+2026-04-18 17:28:01,082 - CMD nslookup google.com: OK
+2026-04-18 17:28:01,110 - CMD wmic logicaldisk get DeviceID,FreeSpace,Size /format:list: OK
+2026-04-18 17:28:01,127 - CMD wmic OS get FreePhysicalMemory,TotalVisibleMemorySize /format:list: OK
+2026-04-18 17:28:01,386 - CMD tasklist /fo table /nh: OK
+2026-04-18 17:28:01,486 - CMD netsh interface show interface: OK
+2026-04-18 17:28:01,513 - CMD sfc /verifyonly: OK
+2026-04-18 17:28:01,555 - CMD dism /online /cleanup-image /checkhealth: OK
+2026-04-18 17:28:03,766 - CMD ipconfig /flushdns: OK
+2026-04-18 17:28:03,897 - CMD ipconfig /release: OK
+2026-04-18 17:28:06,290 - CMD ipconfig /renew: OK
+2026-04-18 17:28:06,368 - CMD netsh winsock reset: OK
+2026-04-18 17:28:06,434 - CMD netsh int ip reset: OK
+2026-04-18 17:28:06,497 - CMD netsh advfirewall reset: OK
+2026-04-18 17:28:06,521 - CMD sfc /scannow: OK

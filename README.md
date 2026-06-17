@@ -53,11 +53,24 @@ O sistema:
 - Exporta um arquivo `.txt` formatado com todos os resultados dos diagnósticos
 - Abre automaticamente no Bloco de Notas após salvar
 
-* Testes unitários automatizados
+* Testes unitários automatizados (TDD)
 - Teste de sucesso: Verifica se a função retorna corretamente a saída do comando quando tudo funciona normalmente.
 - Teste de timeout: Verifica se a função consegue tratar casos em que o comando demora demais para responder.
 - Teste de erro/exceção: Verifica se a função trata erros inesperados sem quebrar o sistema.
 - O código usa mocks (patch e AsyncMock) para simular os comandos do terminal sem executar nada de verdade no computador.
+
+### Sprint 3 (concluída)
+
+* Expansão da suíte de testes — TDD + BDD
+- 20+ testes unitários cobrindo `run_cmd`, `run_full_diagnostics`, `run_fix`, `export_report`, `is_admin`, `show_admin_popup` e `load_config`
+- 17 cenários BDD escritos em Gherkin (PT) com `pytest-bdd`, organizados em 4 arquivos `.feature`: diagnósticos, fixes, autenticação e relatório
+- Padrão Red/Green explícito: cada módulo possui versões `_red.py` (falha intencional) e `_green.py` (implementação correta) para demonstrar o ciclo TDD
+
+* Qualidade de código
+- Configuração centralizada de ferramentas em `pyproject.toml`: Black (formatação), Ruff (lint + isort) e MyPy (tipagem estática)
+- Cobertura de testes configurada com `pytest-cov` (threshold mínimo de 60%)
+- Modo assíncrono automático no pytest via `asyncio_mode = "auto"`
+
 ---
 
 ## Tecnologias utilizadas
@@ -101,6 +114,8 @@ Isso instala:
 | `flet` | Interface gráfica (Material Design) |
 | `rich` | Logs coloridos no terminal |
 | `pytest` | Testes automatizados |
+| `pytest-asyncio` | Suporte a testes de funções assíncronas |
+| `pytest-bdd` | Testes no estilo BDD com arquivos Gherkin `.feature` |
 | `pyinstaller` | Gerar executável `.exe` (opcional) |
 
 ---
@@ -131,14 +146,36 @@ Abra normalmente. Se não estiver como admin, um banner laranja aparecerá com o
 
 ```
 winfix/
-├── main.py          # Interface gráfica (Flet)
-├── diagnostics.py   # Lógica de diagnósticos e fixes
-├── auth.py          # Verificação de privilégios de administrador
-├── config.py        # Configurações gerais
-├── requirements.txt # Dependências Python
-├── WinFix.spec      # Configuração para gerar .exe (PyInstaller)
-├── winfix.log       # Log gerado automaticamente ao rodar
-└── tests/           # Testes automatizados
+├── main.py               # Interface gráfica (Flet)
+├── diagnostics.py        # Lógica de diagnósticos e fixes
+├── diagnostics_red.py    # Versão com falha intencional (ciclo TDD)
+├── diagnostics_green.py  # Versão correta (ciclo TDD)
+├── auth.py               # Verificação de privilégios de administrador
+├── auth_red.py           # Versão com falha intencional (ciclo TDD)
+├── auth_green.py         # Versão correta (ciclo TDD)
+├── config.py             # Configurações gerais
+├── config_red.py         # Versão com falha intencional (ciclo TDD)
+├── config_green.py       # Versão correta (ciclo TDD)
+├── requirements.txt      # Dependências Python
+├── pyproject.toml        # Configuração de Black, Ruff, MyPy e pytest
+├── WinFix.spec           # Configuração para gerar .exe (PyInstaller)
+├── winfix.log            # Log gerado automaticamente ao rodar
+├── tests/
+│   ├── tdd/
+│   │   ├── test_auth.py          # Testes unitários de auth
+│   │   ├── test_config.py        # Testes unitários de config
+│   │   └── test_diagnostics.py   # Testes unitários de diagnostics
+│   └── test.py
+└── feature/
+    ├── auth.feature              # Cenários BDD — autenticação
+    ├── diagnostics.feature       # Cenários BDD — diagnósticos
+    ├── fixes.feature             # Cenários BDD — fixes
+    ├── report.feature            # Cenários BDD — relatório
+    └── bdd/
+        ├── test_auth_bdd.py
+        ├── test_diagnostics_bdd.py
+        ├── test_fixes_bdd.py
+        └── test_report_bdd.py
 ```
 
 ---
@@ -195,8 +232,22 @@ O arquivo `winfix.log` é gerado automaticamente na pasta do projeto a cada exec
 
 ## Testes
 
+### Unitários (TDD)
+
 ```bash
-pytest tests/
+pytest tests/tdd/ -v
+```
+
+### BDD
+
+```bash
+pytest feature/bdd/ -v
+```
+
+### Todos de uma vez
+
+```bash
+pytest tests/ feature/bdd/ -v
 ```
 
 ---
@@ -206,6 +257,7 @@ pytest tests/
 | Problema | Solução |
 |---|---|
 | `ModuleNotFoundError: flet` | Rode `pip install -r requirements.txt` |
+| `ModuleNotFoundError: pytest_bdd` | Rode `pip install pytest-bdd` |
 | Fixes falhando com "Acesso negado" | Abra o app como administrador |
 | App não abre a janela | Verifique se `flet` foi instalado corretamente |
 | SFC/DISM aparecem travados | Normal — podem levar até 30 min, aguarde |
@@ -228,7 +280,7 @@ Com isso, o sistema:
 
 * ✅ Concluído — Sprint 1
 * ✅ Concluído — Sprint 2
-* 🚧 Em desenvolvimento — Sprint 3
+* ✅ Concluído — Sprint 3
 
 ---
 
@@ -264,11 +316,6 @@ Com isso, o sistema:
 ##  Padrão de Commits (Conventional Commits)
 
 ###  Estrutura
-* Allex Maia
-* Julia Souza
-* Murilo Gusmão
-* Nicolas Everton Duarte da Silva
-* Stephany de Mello Amorim
 
 ```
 tipo(escopo): descrição
